@@ -10,7 +10,11 @@ public class Solution {
         int[] numChecks = new int[] {9,5,0,10,3};
 
         for(int i : numChecks) {
-            System.out.println(findPosition(array1, i));
+            if (findPosition(array1, i) < 0) {
+                System.out.println(String.format("%s does not exist", i));
+            } else {
+                System.out.println(String.format("Found %s", i));
+            }
         }
     }
 

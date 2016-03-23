@@ -33,28 +33,31 @@ public class Solution {
     }
 
     static void getText(String line) {
+        System.out.println("Line: " + line);
         String openingTagPattern = "<(.+?)>";
         Pattern r1 = Pattern.compile(openingTagPattern);
         Matcher m1 = r1.matcher(line);
         if (m1.find()) {
+            System.out.println("Found opening bracket");
             String openingTag = m1.group(1);
             String closingTagPattern = String.format("</%s>", openingTag);
             Pattern r2 = Pattern.compile(closingTagPattern);
             Matcher m2 = r2.matcher(line);
             if (m2.find()) {
-                String textBetweenTags = String.format("<%s>(.+?)</%s>", openingTag, openingTag);
+                System.out.println("Found closing bracket");
+                String textBetweenTags = String.format("<%s>(.+)</%s>", openingTag, openingTag);
                 Pattern r3 = Pattern.compile(textBetweenTags);
                 Matcher m3 = r3.matcher(line);
                 if(m3.find()) {
-                    System.out.println(m3.group(1));
+                    getText(m3.group(1));
                 } else {
-                    System.out.println("None");
+                    System.out.println(m3.group(1));
                 }
             } else {
                 System.out.println("None");
             }
         } else {
-            System.out.println("None");
+            System.out.println(line);
         }
     }
 }
